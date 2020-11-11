@@ -15,11 +15,21 @@ employee_wage_details={
 }
 
 def get_working_hour(random_no):
-    working_hour=employee_wage_details.get('full_day_hour') if random_no == 1 else employee_wage_details.get('half_day_hour') if random_no == 2 else 0
+    # working_hour=employee_wage_details.get('full_day_hour') if random_no == 1 else employee_wage_details.get('half_day_hour') if random_no == 2 else 0
+
+    # as python does not have switch case ,so we are using dict to get switch case functionality
+    # https://www.pydanny.com/why-doesnt-python-have-switch-case.html
+
+    switcher = {
+        0: 0,
+        1: employee_wage_details.get('full_day_hour'),
+        2: employee_wage_details.get('half_day_hour'),
+    }
+    working_hour=switcher.get(random_no)
     return working_hour
 
 
 compute_daily_wage = lambda wage_per_hour, working_hour: wage_per_hour * working_hour
 # print(compute_daily_wage(employee_wage_details.get('wage_per_hour'), employee_wage_details.get('full_day_hour')))
-print(compute_daily_wage(employee_wage_details.get('wage_per_hour'), get_working_hour(random_no)))
+# print(compute_daily_wage(employee_wage_details.get('wage_per_hour'), get_working_hour(random_no)))
 compute_daily_wage(employee_wage_details.get('wage_per_hour'), get_working_hour(random_no))
